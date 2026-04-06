@@ -1,26 +1,32 @@
 pipeline{
   agent any 
-  stages{
-    stage('1.checkout'){
+  stages
+  {
+    stage('1. checkout'){
       steps{
-        git url:'https://github.com/Pooja1234866/Dockerbb3',branch:'main'
-        }
-        }
-        stage('2,Build Image'){
-          steps{
-            bat 'docker build -t Mywebsite .'
+      git url:'https://github.com/Pooja1234866/Dockerbb3', branch:'main'
+      }
+    }
+    
+    stage('2. Build Image'){
+      steps{
+        bat 'docker build -t mywebsite .'
+      }
+    }
+
+    stage('3. Stop old Containers'){
+      steps{
+        bat 'docker stop mycont || exit 0'
+        bat 'docker rm mycont || exit 0'
           }
         }
-        stage('3.stop/Remove old Containers'){
-          steps{
-            bat'docker stop mycount || exit 0'
-            bat'docker rm mycount || exit 0'
-          }
-        }
-        stage('4.run the Image- containerize'){
-        step{
-          bat'docker run -d -p 5000:80 --name mycount mywebsite'
-        }
-        }
-        }
-        }
+
+    stage('4. Run the Image- Containerize'){
+      steps{
+        bat 'docker run -d -p 5000:80 --name mycont mywebsite'
+      }
+    }
+
+    
+  }
+}
