@@ -1,12 +1,12 @@
 pipeline{
   agent any 
   stages{
-    stages('1.checkout'){
+    stage('1.checkout'){
       steps{
         git url:'https://github.com/Pooja1234866/Dockerbb3',branch:'main'
         }
         }
-        stages('2,Build Image'){
+        stage('2,Build Image'){
           steps{
             bat 'docker build -t Mywebsite .'
           }
